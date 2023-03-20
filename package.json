@@ -1,0 +1,19 @@
+{
+  "name": "lightningcss-react-native",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx watch ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "lightningcss": "^1.19.0",
+    "prettier": "^2.8.4",
+    "tsx": "^3.12.5",
+    "typescript": "^5.0.2"
+  }
+}
