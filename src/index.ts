@@ -1,7 +1,7 @@
 import { transform } from "lightningcss";
 import { collectRules } from "./react-native";
 
-function toReactNative(css: string) {
+export function toReactNative(css: string) {
   const reactNative: Record<string, Record<string, unknown>> = {};
 
   const { code } = transform({
@@ -14,7 +14,3 @@ function toReactNative(css: string) {
 
   return { web: code, reactNative };
 }
-
-console.log(
-  JSON.stringify(toReactNative(".foo { color: red;}").reactNative, null, 2)
-);

@@ -21,11 +21,17 @@ export function collectRules(rules: Record<string, Record<string, unknown>>) {
 
       if (Array.isArray(rnDeclarations)) {
         for (const { property, value } of rnDeclarations) {
-          ruleRecord[property] = value;
+          if (value !== undefined) {
+            ruleRecord[property] = value;
+          }
         }
-      } else {
+      } else if (rnDeclarations.value !== undefined) {
         ruleRecord[rnDeclarations.property] = rnDeclarations.value;
       }
+    }
+
+    if (Object.keys(ruleRecord).length === 0) {
+      return rule;
     }
 
     for (const selectors of rule.value.selectors) {
@@ -35,6 +41,8 @@ export function collectRules(rules: Record<string, Record<string, unknown>>) {
         }
       }
     }
+
+    return rule;
   };
 
   return ruleExit;

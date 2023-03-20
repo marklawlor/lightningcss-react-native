@@ -1,5 +1,5 @@
 import { Declaration } from "lightningcss";
-import { parseAndMutate, parseValue } from "./value";
+import { parseAndCollect, parseValue } from "./value";
 import { RNDeclaration } from "../types";
 
 export function textShadow(
@@ -8,12 +8,12 @@ export function textShadow(
   const declarations: RNDeclaration[] = [];
 
   for (const value of declaration.value) {
-    parseAndMutate(
+    parseAndCollect(
       { property: "textShadowColor", value: value.color },
       declarations
     );
 
-    parseAndMutate(
+    parseAndCollect(
       {
         property: "textShadowRadius",
         value: parseValue(value.blur),

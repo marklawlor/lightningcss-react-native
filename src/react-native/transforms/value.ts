@@ -1,7 +1,7 @@
 import { Length } from "lightningcss";
 import { RNDeclaration } from "../types";
 
-export function parseAndMutate(
+export function parseAndCollect(
   declaration: RNDeclaration,
   declarations: RNDeclaration[]
 ) {

@@ -17,30 +17,11 @@ export function transform(
       case "scaleY":
       case "scaleZ":
       case "translateX":
-      case "translateY":
-        transform.value.push({
-          [value.type]: parseValue(value.value),
-        });
-        break;
-      case "translate": {
-        transform.value.push({
-          translateX: parseValue(value.value[0]),
-          translateY: parseValue(value.value[1]),
-        });
-        break;
-      }
-      case "scale": {
-        transform.value.push({
-          scaleX: parseValue(value.value[0]),
-          scaleY: parseValue(value.value[1]),
-        });
-        break;
-      }
-      case "skew": {
-        transform.value.push({
-          skewX: parseAngle(value.value[0]),
-          skewY: parseAngle(value.value[1]),
-        });
+      case "translateY": {
+        const _value = parseValue(value.value);
+        if (_value !== undefined) {
+          transform.value.push({ [value.type]: _value });
+        }
         break;
       }
       case "rotate":
@@ -49,10 +30,35 @@ export function transform(
       case "rotateZ":
       case "skewX":
       case "skewY":
-        transform.value.push({
-          [value.type]: parseAngle(value.value),
-        });
+        const _value = parseAngle(value.value);
+        if (_value !== undefined) {
+          transform.value.push({ [value.type]: _value });
+        }
         break;
+      case "translate": {
+        const translateX = parseValue(value.value[0]);
+        const translateY = parseValue(value.value[1]);
+        if (translateX !== undefined || translateY !== undefined) {
+          transform.value.push({ translateX, translateY });
+        }
+        break;
+      }
+      case "scale": {
+        const scaleX = parseValue(value.value[0]);
+        const scaleY = parseValue(value.value[1]);
+        if (scaleX !== undefined || scaleY !== undefined) {
+          transform.value.push({ scaleX, scaleY });
+        }
+        break;
+      }
+      case "skew": {
+        const skewX = parseAngle(value.value[0]);
+        const skewY = parseAngle(value.value[1]);
+        if (skewX !== undefined || skewY !== undefined) {
+          transform.value.push({ skewX, skewY });
+        }
+        break;
+      }
       case "matrix":
         transform.value.push({
           matrix: [
@@ -64,10 +70,14 @@ export function transform(
             value.value.f,
           ],
         });
-
+        break;
       default:
-        throw new Error(`Unsupported transform: ${value.type}`);
+        return undefined;
     }
+  }
+
+  if (transform.value.length === 0) {
+    return undefined;
   }
 
   return transform;
@@ -77,7 +87,7 @@ function parseAngle(angle: Angle) {
   switch (angle.type) {
     case "deg":
     case "rad":
-      return parseValue(angle.value);
+      return `${angle.value}${angle.type}`;
     default:
       return undefined;
   }
