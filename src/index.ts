@@ -16,9 +16,5 @@ function toReactNative(css: string) {
 }
 
 console.log(
-  JSON.stringify(
-    toReactNative(".foo { transform: translate(10px, 5px);}").reactNative,
-    null,
-    2
-  )
+  JSON.stringify(toReactNative(".foo { color: red;}").reactNative, null, 2)
 );
