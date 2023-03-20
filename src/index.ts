@@ -4,7 +4,7 @@ import { collectRules } from "./react-native";
 export function toReactNative(css: string) {
   const reactNative: Record<string, Record<string, unknown>> = {};
 
-  const { code } = transform({
+  transform({
     filename: "style.css",
     code: Buffer.from(css),
     visitor: {
@@ -12,5 +12,5 @@ export function toReactNative(css: string) {
     },
   });
 
-  return { web: code, reactNative };
+  return reactNative;
 }

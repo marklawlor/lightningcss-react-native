@@ -8,7 +8,7 @@ matchers.customTesters = [];
 expect.extend({
   toRNStyle(received, expected) {
     return matchers.toStrictEqual(
-      toReactNative(`.className {${received}}`).reactNative["className"],
+      toReactNative(`.className {${received}}`)["className"],
       expected
     );
   },
