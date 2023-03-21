@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "jsx": "react-native"
+  },
   "extends": "../tsconfig",
   "include": ["**/*"]
 }
